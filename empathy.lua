@@ -15,6 +15,6 @@
 local frame = CreateFrame("FRAME", "FooAddonFrame");
 frame:RegisterEvent("MINIMAP_PING");
 local function eventHandler(self, event, ...)
- print("Ping");
+ print("Peng");
 end
 frame:SetScript("OnEvent", eventHandler);
