@@ -6,6 +6,7 @@
 ## DefaultState: Enabled
 ## LoadOnDemand: 0
 ## SavedVariables: empathy_sv
+## SavedVariablesPerCharacter: empathy_svc
 
 empathy.lua
 empathy_defaults.lua
