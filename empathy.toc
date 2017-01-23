@@ -1,0 +1,10 @@
+## Interface: 71500
+## Title: Empathy | by GC 
+## Author: GC
+## Version: 0.1
+## Notes: Empathy is socializing with the other wow players, so you can focus your efforts on the more rewarding objectives
+## DefaultState: Enabled
+## LoadOnDemand: 0
+## SavedVariables: empathy_sv
+
+empathy.lua
