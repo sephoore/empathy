@@ -13,13 +13,15 @@
 
 -- ################ create frames #######################
 
-	local frame = CreateFrame("FRAME", "FooAddonFrame");
+	local party_frame = CreateFrame("FRAME");
+	local guild_frame = CreateFrame("FRAME");
 
 -- ############### register events ######################
 
-	frame:RegisterEvent("ADDON_LOADED"); -- check if addon is loaded completely
-	frame:RegisterEvent("PLAYER_LOGIN"); -- register my login
-
+	-- frame:RegisterEvent("ADDON_LOADED"); -- check if addon is loaded completely
+	-- frame:RegisterEvent("PLAYER_LOGIN"); -- register my login
+	-- frame:RegisterEvent("GROUP_JOINED"); -- register party invite
+	
 -- ################# global vars ########################
 
 	SLASH_EMPATHY1, SLASH_EMPATHY2 = '/empgui', '/empathy' ;  -- open GUI
@@ -39,20 +41,39 @@
 			print(GUI) ;
 		 end
 		end	
+	
 
-		
+		function empathy.MyHandler(frame, event, ...)
+			if event == "PLAYER_LOGIN" then
+				SendChatMessage(empathy_svc.guild_hello, "GUILD", nil, nil);
+			elseif event == "GROUP_JOINED" then
+				SendChatMessage(empathy_svc.party_hello, "PARTY", nil, nil);
+			end
+		end
+
+		self:RegisterEvent("ADDON_LOADED")
+		self:RegisterEvent("PLAYER_LOGIN")
+		self:RegisterEvent("GROUP_JOINED")
+		self:SetScript("OnEvent", empathy.MyHandler)
+
+	
 	-- +++++++++++ GUILD ++++++++++++
 		-- hello
-		local function guild_eventHandler(self, event, ...)
-		 if event == 'PLAYER_LOGIN' then
-			SendChatMessage(empathy_svc.guild_hello, "GUILD", nil, nil);
-		 end
-		end
-		frame:SetScript("OnEvent", guild_eventHandler);
+		-- guild_frame:SetScript("OnEvent",
+		-- function(self, event, ...)
+		-- 	 if event == 'PLAYER_LOGIN' then
+		-- 		SendChatMessage(empathy_svc.guild_hello, "GUILD", nil, nil);
+		-- 	 end
+		-- end)
 
 	-- +++++++++++ PARTY ++++++++++++
+
+		-- guild_frame:SetScript("OnEvent",
+		-- function(self, event, ...)
+		-- 	 if event == 'GROUP_JOINED' then
+		-- 		SendChatMessage(empathy_svc.party_hello, "PARTY", nil, nil);
+		-- 	 end
+		-- end)
+		
 	-- +++++++++++ RAID +++++++++++++
 	-- ++++++++++++ PVP +++++++++++++
-
-
-
